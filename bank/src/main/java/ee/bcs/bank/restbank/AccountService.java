@@ -73,4 +73,25 @@ public class AccountService {
         }
         return null;
     }
+
+    public RequestResult updateOwnerDetails(List<AccountDto> accounts, AccountDto accountDto) {
+
+        RequestResult requestResult = new RequestResult();
+
+
+        int accountId = accountDto.getId();
+        if (!accountIdExist(accounts, accountId)) {
+            requestResult.setError("Account ID: " + accountId + " does not exist!");
+            return requestResult;
+        }
+
+        AccountDto account = getAccountByID(accounts, accountId); //elab listis ja seal objekt mis viitab mälukohale. kui muudame nime, siis mälukohas muutub ka. Ei pea enam lisaks muutma
+        account.setFirstName(accountDto.getFirstName());
+        account.setLastName(accountDto.getLastName());
+
+        requestResult.setAccountId(accountId);
+        requestResult.setMessage("Successfully updated account.");
+
+        return requestResult;
+    }
 }
