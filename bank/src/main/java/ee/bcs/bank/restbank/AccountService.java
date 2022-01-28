@@ -78,7 +78,6 @@ public class AccountService {
 
         RequestResult requestResult = new RequestResult();
 
-
         int accountId = accountDto.getId();
         if (!accountIdExist(accounts, accountId)) {
             requestResult.setError("Account ID: " + accountId + " does not exist!");
@@ -111,4 +110,32 @@ public class AccountService {
         return requestResult;
 
     }
+
+    public RequestResult updateLockedStatus(List<AccountDto> accounts, int accountId) {
+        RequestResult requestResult = new RequestResult();
+
+        if (!accountIdExist(accounts, accountId)) {
+            requestResult.setError("Account ID: " + accountId + " does not exist!");
+            return requestResult;
+        }
+
+        AccountDto account = getAccountByID(accounts, accountId);
+
+        if (account.getLocked()) {
+            account.setLocked(false);
+            requestResult.setMessage("Account unlocked");
+            requestResult.setAccountId(accountId);
+            return requestResult;
+        }
+
+        account.setLocked(true);
+        requestResult.setMessage("Account locked");
+        requestResult.setAccountId(accountId);
+        return requestResult;
+
+
+//        AccountDto account = getAccountByID(accounts, accountId); //elab listis ja seal objekt mis viitab mälukohale. kui muudame nime, siis mälukohas muutub ka. Ei pea enam lisaks muutma
+//        account.setFirstName(accountDto.getFirstName());
+
+        }
 }

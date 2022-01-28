@@ -79,10 +79,17 @@ public class BankController {
         return accountService.deleteAccount(bank.getAccounts(), accountId);
     }
 
+    @PutMapping("/update/locked/status")
+    public RequestResult updateLockedStatus(@RequestParam int accountId) {
+        return accountService.updateLockedStatus(bank.getAccounts(), accountId);
+    }
 
 
 
     // TODO: 27.01.2022 tee endpoint millega saab kontod lukustada/avada, kontrollige ka ID olemasolu
+
+
+
 
     //  loo transactionService alla uus teenus                                      createTransactionForNewAccount()
     //  loo bankService alla uus teenus                                             addTransaction()
