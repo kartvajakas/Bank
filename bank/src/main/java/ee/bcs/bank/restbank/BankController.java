@@ -74,6 +74,16 @@ public class BankController {
         return accountService.updateOwnerDetails(bank.getAccounts(), accountDto);
     }
 
+    @DeleteMapping("/delete/account")
+    public RequestResult deleteAccount(@RequestParam int accountId) {
+        return accountService.deleteAccount(bank.getAccounts(), accountId);
+    }
+
+
+
+
+    // TODO: 27.01.2022 tee endpoint millega saab kontod lukustada/avada, kontrollige ka ID olemasolu
+
     //  loo transactionService alla uus teenus                                      createTransactionForNewAccount()
     //  loo bankService alla uus teenus                                             addTransaction()
 
